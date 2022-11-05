@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Chosers from './Chosers';
-import reportWebVitals from './reportWebVitals'
+import Checkbox from './Checkbox';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,7 @@ root.render(
                     <Chosers/>
                 </div>
                 <div className="col">
-
+                    <Checkbox/>
                 </div>
             </div>
         </div>
