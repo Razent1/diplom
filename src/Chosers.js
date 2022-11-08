@@ -10,11 +10,17 @@ import {Button} from "react-bootstrap";
 const itemsDB = ["Databricks"];
 const dbSchemas = ["default"]; //here will implement
 
-function Chosers() {
+function Chosers({childInfo}) {
     const [db, setDB] = useState("");
     const [schema, setSchema] = useState("");
     const [checker, setChecker] = useState("");
     const [filtration, setFiltration] = useState("");
+    const [data, setData] = useState('');
+
+    const parentToChild = () => {
+        setData("This is data from Parent Component to the Child Component.");
+        console.log(data);
+    }
 
     const handleInputChangeChecker = (event) => {
         const { value } = event.target
@@ -85,6 +91,11 @@ function Chosers() {
                     onChange={handleInputChangeFiltration}
                 />
             </div>
+                <div className="d-grid gap-2" style={{alignSelf: "flex-end"}}>
+                    <Button variant="primary" size="lg" onClick={() => parentToChild()}>
+                        Make a check
+                    </Button>{' '}
+                </div>
             </div>
             </>
     );

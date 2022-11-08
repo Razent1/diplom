@@ -10,3 +10,7 @@
 .dropdownBlock {
   margin-bottom: 50px;
 }
+
+.but {
+  justify-content:flex-end;
+}

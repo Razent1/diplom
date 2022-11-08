@@ -11,6 +11,14 @@ import Form from "react-bootstrap/Form";
 function Cron() {
     const [value, onChange] = useState('10:00');
     const [typeInfo, setTypeInfo] = useState('');
+    const [typeWeek, setTypeWeek] = useState({
+        sun: false,
+        mon: false,
+        tu: false,
+        we: false,
+        thu: false,
+        fri: false
+    });
 
     return (
         <div style={{marginTop: '25px', marginLeft: '55px'}}>
@@ -21,7 +29,7 @@ function Cron() {
                 <div className="col-8">Choose the time of checking</div>
                 <TimePicker onChange={onChange} value={value} className="col"/>
             </div>
-            <div className="dropdownBlock">
+            <div className="dropdownBlock" style={{borderBottom: "1px solid black"}}>
                 <Form>
                     {['Every Hour', 'Every Day', 'Every Week', 'Every Month']
                         .map((type) => (
@@ -34,7 +42,8 @@ function Cron() {
                                     onClick={(e) => {
                                         if (type === "Every Hour") {
                                             setTypeInfo(`${type}`)
-                                        } else if (type === "Every Day") {
+                                        }
+                                        else if (type === "Every Day") {
                                             setTypeInfo(`${type}`)
                                         }
                                         else if (type === "Every Week") {
@@ -43,7 +52,59 @@ function Cron() {
                                         else if (type === "Every Month") {
                                             setTypeInfo(`${type}`)
                                         }
-                                        console.log(typeInfo);
+                                    }}
+                                />
+                            </div>
+                        ))}
+                </Form>
+            </div>
+            <div className="dropdownBlock">
+                <div className="headings" style={{marginBottom: '20px'}}>
+                    Repeat every day of week
+                </div>
+                <Form>
+                    {['Sun', 'Mon', 'Tu', 'We', 'Thu', 'Fri']
+                        .map((type) => (
+                            <div key={`inline-checkbox`} className="mb-3">
+                                <Form.Check
+                                    inline
+                                    type="checkbox"
+                                    name="group1"
+                                    id={`inline-checkbox-1`}
+                                    label={`${type}`}
+                                    onClick={(e) => {
+                                        if (type === "Sun") {
+                                            setTypeWeek(typeWeek => ({
+                                                ...typeWeek,
+                                                sun: e.target.checked
+                                            }))
+                                        } else if (type === "Mon") {
+                                            setTypeWeek(typeInfo => ({
+                                                ...typeWeek,
+                                                mon: e.target.checked
+                                            }))
+                                        } else if (type === "Tu") {
+                                            setTypeWeek(typeWeek => ({
+                                                ...typeWeek,
+                                                tu: e.target.checked
+                                            }))
+                                        } else if (type === "We") {
+                                            setTypeWeek(typeWeek => ({
+                                                ...typeWeek,
+                                                we: e.target.checked
+                                            }))
+                                        } else if (type === "Thu") {
+                                            setTypeWeek(typeWeek => ({
+                                                ...typeWeek,
+                                                thu: e.target.checked
+                                            }))
+                                        } else if (type === "Fri") {
+                                            setTypeWeek(typeWeek => ({
+                                                ...typeWeek,
+                                                fri: e.target.checked
+                                            }))
+                                        }
+                                        console.log(typeWeek);
                                     }}
                                 />
                             </div>
