@@ -5,17 +5,21 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import {Button} from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import {setDatabase, setTable} from './store/exportData/exportData';
 
 
 const itemsDB = ["Databricks"];
 const dbSchemas = ["default"]; //here will implement
 
-function Chosers({childInfo}) {
-    const [db, setDB] = useState("");
-    const [schema, setSchema] = useState("");
+function Chosers() {
+    // const [db, setDB] = useState("");
+    // const [schema, setSchema] = useState("");
     const [checker, setChecker] = useState("");
     const [filtration, setFiltration] = useState("");
     const [data, setData] = useState('');
+    const exportData = useSelector(state => state.data);
+    const dispatch = useDispatch();
 
     const parentToChild = () => {
         setData("This is data from Parent Component to the Child Component.");
@@ -39,19 +43,19 @@ function Chosers({childInfo}) {
             <div className="headings">
                 Connection to DataBase
             </div>
-
+                {/*<div>{exportData.db}</div>*/}
                 <Dropdown>
                     <Dropdown.Toggle variant="outline-dark" style={{marginBottom: '10px', width:'100%',
                         display:'block'}}>Choose from the list</Dropdown.Toggle>
                     <Dropdown.Menu>
                         {itemsDB.map((itemsDB) => (
-                            <Dropdown.Item onClick={() => setDB(itemsDB)}>
+                            <Dropdown.Item onClick={() => {dispatch(setDatabase(itemsDB))}}>
                                 {itemsDB}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
                 </Dropdown>
-                <pre>Defualt selected DB: {db}</pre>
+                <pre>Defualt selected DB: {exportData.db}</pre>
             </div>
             <div className="dropdownBlock">
                 <div className="headings">
@@ -63,13 +67,13 @@ function Chosers({childInfo}) {
                         display:'block'}}>Choose from the list</Dropdown.Toggle>
                     <Dropdown.Menu>
                         {dbSchemas.map((dbSchema) => (
-                            <Dropdown.Item onClick={() => setSchema(dbSchema)}>
+                            <Dropdown.Item onClick={() => dispatch(setTable(dbSchema))}>
                                 {dbSchema}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
                 </Dropdown>
-                <pre>Defualt selected Schema: {schema}</pre>
+                <pre>Defualt selected Schema: {exportData.table}</pre>
             </div>
             <div className="dropdownBlock">
                 <Form.Label htmlFor="nameChecker">Name of Checker</Form.Label>
@@ -92,9 +96,10 @@ function Chosers({childInfo}) {
                 />
             </div>
                 <div className="d-grid gap-2" style={{alignSelf: "flex-end"}}>
-                    <Button variant="primary" size="lg" onClick={() => parentToChild()}>
+                    <Button variant="primary" size="lg">
                         Make a check
                     </Button>{' '}
+                    {/*<div>{console.log(exportData.db)}</div>*/}
                 </div>
             </div>
             </>

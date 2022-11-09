@@ -2,6 +2,8 @@ import './App.css';
 
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
+import {setCheckers} from './store/exportData/exportData';
+import {useDispatch, useSelector} from "react-redux";
 
 function Checkbox() {
     const [typeInfo, setTypeInfo] = useState({
@@ -11,6 +13,8 @@ function Checkbox() {
         actualitySimple: false,
         actualityDifficulty: false
     });
+    const exportData = useSelector(state => state.data);
+    const dispatch = useDispatch();
 
 
     return (
@@ -29,28 +33,28 @@ function Checkbox() {
                                     label={`${type}`}
                                     onClick={(e) => {
                                         if (type === "Duplications") {
-                                            setTypeInfo(typeInfo => ({
-                                                ...typeInfo,
+                                            dispatch(setCheckers({
+                                                ...exportData.checker,
                                                 duplication: e.target.checked
                                             }))
                                         } else if (type === "Null in Columns") {
-                                            setTypeInfo(typeInfo => ({
-                                                ...typeInfo,
+                                            dispatch(setCheckers({
+                                                ...exportData.checker,
                                                 nullCols: e.target.checked
                                             }))
                                         } else if (type === "Count of rows") {
-                                            setTypeInfo(typeInfo => ({
-                                                ...typeInfo,
+                                            dispatch(setCheckers({
+                                                ...exportData.checker,
                                                 countRows: e.target.checked
                                             }))
                                         } else if (type === "Actuality Simple") {
-                                            setTypeInfo(typeInfo => ({
-                                                ...typeInfo,
+                                            dispatch(setCheckers({
+                                                ...exportData.checker,
                                                 actualitySimple: e.target.checked
                                             }))
                                         } else if (type === "Actuality Difficulty") {
-                                            setTypeInfo(typeInfo => ({
-                                                ...typeInfo,
+                                            dispatch(setCheckers({
+                                                ...exportData.checker,
                                                 actualityDifficulty: e.target.checked
                                             }))
                                         }

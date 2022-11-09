@@ -65,12 +65,12 @@ function Cron() {
                 <Form>
                     {['Sun', 'Mon', 'Tu', 'We', 'Thu', 'Fri']
                         .map((type) => (
-                            <div key={`inline-checkbox`} className="mb-3">
+                            <div key={`inline-checkbox-${type}`} className="mb-3">
                                 <Form.Check
                                     inline
                                     type="checkbox"
                                     name="group1"
-                                    id={`inline-checkbox-1`}
+                                    id={`inline-checkbox-1${type}`}
                                     label={`${type}`}
                                     onClick={(e) => {
                                         if (type === "Sun") {
@@ -104,7 +104,6 @@ function Cron() {
                                                 fri: e.target.checked
                                             }))
                                         }
-                                        console.log(typeWeek);
                                     }}
                                 />
                             </div>
