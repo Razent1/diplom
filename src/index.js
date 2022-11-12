@@ -9,12 +9,6 @@ import { createStore } from 'redux';
 import exportData from './store/exportData/exportData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-// const store = createStore(() => ({
-//     exportData:
-//         {
-//             db: null
-//         }
-// }));
 const store = createStore (exportData);
 root.render(
     <React.StrictMode>

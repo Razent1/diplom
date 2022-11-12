@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import {Button} from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
-import {setDatabase, setTable} from './store/exportData/exportData';
+import {setDatabase, setTable, setCheckerName, setFiltrationCondition} from './store/exportData/exportData';
 
 
 const itemsDB = ["Databricks"];
@@ -21,9 +21,9 @@ function Chosers() {
     const exportData = useSelector(state => state.data);
     const dispatch = useDispatch();
 
-    const parentToChild = () => {
-        setData("This is data from Parent Component to the Child Component.");
-        console.log(data);
+    const onSubmitButton = () => {
+        dispatch(setCheckerName(checker));
+        dispatch(setFiltrationCondition(filtration));
     }
 
     const handleInputChangeChecker = (event) => {
@@ -43,7 +43,6 @@ function Chosers() {
             <div className="headings">
                 Connection to DataBase
             </div>
-                {/*<div>{exportData.db}</div>*/}
                 <Dropdown>
                     <Dropdown.Toggle variant="outline-dark" style={{marginBottom: '10px', width:'100%',
                         display:'block'}}>Choose from the list</Dropdown.Toggle>
@@ -96,10 +95,10 @@ function Chosers() {
                 />
             </div>
                 <div className="d-grid gap-2" style={{alignSelf: "flex-end"}}>
-                    <Button variant="primary" size="lg">
+                    <Button variant="primary" size="lg" onClick={onSubmitButton}>
                         Make a check
                     </Button>{' '}
-                    {/*<div>{console.log(exportData.db)}</div>*/}
+                    <div>{console.log(exportData)}</div>
                 </div>
             </div>
             </>

@@ -7,6 +7,8 @@ import TimePicker from 'react-time-picker';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import Form from "react-bootstrap/Form";
+import {setRepeats, setTime, setInterval} from './store/exportData/exportData';
+import {useDispatch, useSelector} from "react-redux";
 
 function Cron() {
     const [value, onChange] = useState('10:00');
@@ -19,6 +21,8 @@ function Cron() {
         thu: false,
         fri: false
     });
+    const exportData = useSelector(state => state.data);
+    const dispatch = useDispatch();
 
     return (
         <div style={{marginTop: '25px', marginLeft: '55px'}}>
@@ -41,16 +45,16 @@ function Cron() {
                                     label={`${type}`}
                                     onClick={(e) => {
                                         if (type === "Every Hour") {
-                                            setTypeInfo(`${type}`)
+                                            dispatch(setInterval(`${type}`))
                                         }
                                         else if (type === "Every Day") {
-                                            setTypeInfo(`${type}`)
+                                            dispatch(setInterval(`${type}`))
                                         }
                                         else if (type === "Every Week") {
-                                            setTypeInfo(`${type}`)
+                                            dispatch(setInterval(`${type}`))
                                         }
                                         else if (type === "Every Month") {
-                                            setTypeInfo(`${type}`)
+                                            dispatch(setInterval(`${type}`))
                                         }
                                     }}
                                 />
@@ -74,33 +78,33 @@ function Cron() {
                                     label={`${type}`}
                                     onClick={(e) => {
                                         if (type === "Sun") {
-                                            setTypeWeek(typeWeek => ({
-                                                ...typeWeek,
-                                                sun: e.target.checked
+                                            dispatch(setRepeats({
+                                                ...exportData.repeats,
+                                                su: e.target.checked
                                             }))
                                         } else if (type === "Mon") {
-                                            setTypeWeek(typeInfo => ({
-                                                ...typeWeek,
-                                                mon: e.target.checked
+                                            dispatch(setRepeats({
+                                                ...exportData.repeats,
+                                                mo: e.target.checked
                                             }))
                                         } else if (type === "Tu") {
-                                            setTypeWeek(typeWeek => ({
-                                                ...typeWeek,
+                                            dispatch(setRepeats({
+                                                ...exportData.repeats,
                                                 tu: e.target.checked
                                             }))
                                         } else if (type === "We") {
-                                            setTypeWeek(typeWeek => ({
-                                                ...typeWeek,
+                                            dispatch(setRepeats({
+                                                ...exportData.repeats,
                                                 we: e.target.checked
                                             }))
                                         } else if (type === "Thu") {
-                                            setTypeWeek(typeWeek => ({
-                                                ...typeWeek,
+                                            dispatch(setRepeats({
+                                                ...exportData.repeats,
                                                 thu: e.target.checked
                                             }))
                                         } else if (type === "Fri") {
-                                            setTypeWeek(typeWeek => ({
-                                                ...typeWeek,
+                                            dispatch(setRepeats({
+                                                ...exportData.repeats,
                                                 fri: e.target.checked
                                             }))
                                         }
