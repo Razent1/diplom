@@ -78,7 +78,7 @@ const defaultData =
         },
         checkerName: null,
         filtrationCondition: null,
-        checkingTime: '10:00',
+        time: '10:00',
         interval: null,
         repeats: {
             su: false,
@@ -116,7 +116,7 @@ function data(state = defaultData, action) {
             return (
                 {
                     ...state,
-                    checkingTime: action.checkingTime
+                    time: action.time
                 }
             )
         case SET_CHECKER_NAME:

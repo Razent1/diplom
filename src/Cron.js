@@ -2,7 +2,7 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import TimePicker from 'react-time-picker';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
@@ -23,6 +23,11 @@ function Cron() {
     });
     const exportData = useSelector(state => state.data);
     const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     // Обновляем заголовок документа с помощью API браузера
+    //     document.title = `Вы нажали ${value} раз`;
+    // });
 
     return (
         <div style={{marginTop: '25px', marginLeft: '55px'}}>
@@ -45,16 +50,20 @@ function Cron() {
                                     label={`${type}`}
                                     onClick={(e) => {
                                         if (type === "Every Hour") {
-                                            dispatch(setInterval(`${type}`))
+                                            dispatch(setInterval(type));
+                                            dispatch(setTime(value));
                                         }
                                         else if (type === "Every Day") {
-                                            dispatch(setInterval(`${type}`))
+                                            dispatch(setInterval(type));
+                                            dispatch(setTime(value));
                                         }
                                         else if (type === "Every Week") {
-                                            dispatch(setInterval(`${type}`))
+                                            dispatch(setInterval(type));
+                                            dispatch(setTime(value));
                                         }
                                         else if (type === "Every Month") {
-                                            dispatch(setInterval(`${type}`))
+                                            dispatch(setInterval(type));
+                                            dispatch(setTime(value));
                                         }
                                     }}
                                 />
